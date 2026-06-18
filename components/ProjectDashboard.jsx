@@ -372,23 +372,30 @@ export default function ProjectDashboard() {
   const [statsVisible, setStatsVisible] = useState(false);
 
   // Load (and seed) projects on mount.
+  // Always merges new seed projects so returning visitors see updates.
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
     try {
       const raw = window.localStorage.getItem(STORAGE_KEY) || window.localStorage.getItem(LEGACY_STORAGE_KEY);
-      const alreadySeeded = window.localStorage.getItem(SEED_FLAG_KEY);
       let parsed = raw ? JSON.parse(raw) : [];
 
       if (!Array.isArray(parsed)) parsed = [];
 
-      if (parsed.length === 0 && !alreadySeeded) {
-        parsed = SEED_PROJECTS;
-        window.localStorage.setItem(SEED_FLAG_KEY, 'true');
+      // Build a set of existing project IDs for fast lookup
+      const existingIds = new Set(parsed.map((p) => p.id));
+
+      // Always merge in any seed projects that don't already exist
+      const newSeedProjects = SEED_PROJECTS.filter((sp) => !existingIds.has(sp.id));
+      if (newSeedProjects.length > 0 || parsed.length === 0) {
+        parsed = [...newSeedProjects, ...parsed];
+        // If first visit with no projects, add all seeds
+        if (parsed.length === 0) parsed = SEED_PROJECTS;
       }
 
       setProjects(parsed);
       window.localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
+      window.localStorage.setItem(SEED_FLAG_KEY, 'true');
     } catch (error) {
       console.warn('Failed to load saved projects:', error);
       setProjects(SEED_PROJECTS);
