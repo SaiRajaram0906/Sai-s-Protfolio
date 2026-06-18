@@ -1,0 +1,54 @@
+.ambientLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Subtle grid — barely visible, just enough structure to read as
+   "premium engineered surface" rather than empty void */
+.grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 75% 65% at 50% 40%, rgba(0, 0, 0, 0.9), transparent 90%);
+  -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 40%, rgba(0, 0, 0, 0.9), transparent 90%);
+  opacity: 0.6;
+}
+
+/* Minimal animated gradient — one slow, soft wash drifting across the
+   hero. No particles, no parallax, no flicker. */
+.gradientWash {
+  position: absolute;
+  inset: -20%;
+  background: radial-gradient(
+    closest-side,
+    rgba(255, 138, 50, 0.10),
+    transparent 70%
+  );
+  width: 60%;
+  height: 60%;
+  filter: blur(40px);
+  animation: driftWash 26s ease-in-out infinite;
+  opacity: 0.7;
+}
+
+@keyframes driftWash {
+  0%,
+  100% {
+    transform: translate(0%, 0%);
+  }
+  50% {
+    transform: translate(28%, 14%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gradientWash {
+    animation: none;
+  }
+}
