@@ -9,7 +9,7 @@ const CERTIFICATIONS = [
 ];
 
 const ACHIEVEMENTS = [
-  'Built 4+ Projects',
+  'Built 6+ Projects',
   'Full Stack Development',
   'Machine Learning Projects',
   'Database Automation Systems',
