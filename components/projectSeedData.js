@@ -4,6 +4,66 @@
 
 export const SEED_PROJECTS = [
   {
+    id: 'seed-timetable',
+    title: 'My Timetable – Smart Offline Schedule Organizer',
+    shortDescription:
+      'My Timetable is a responsive offline timetable management web application built using HTML, CSS, and JavaScript. It helps students easily view and organize their schedules.',
+    description:
+      'My Timetable is a responsive offline timetable management web application built using HTML, CSS, and JavaScript. It helps students easily view and organize their class schedules without requiring an internet connection. The app stores data locally and provides a clean, intuitive interface for managing weekly timetables.',
+    category: 'Web Development',
+    tools: ['HTML', 'CSS', 'JavaScript'],
+    highlights: [
+      'Offline Support',
+      'Responsive Design',
+      'Local Storage',
+      'Weekly View',
+      'Easy Schedule Management',
+    ],
+    problem: 'Students needed a simple, offline-capable tool to manage their class schedules.',
+    solution: 'A lightweight PWA-style web app that works without internet and stores schedules locally.',
+    architecture:
+      'A vanilla HTML/CSS/JavaScript frontend that leverages localStorage for persistent offline data storage with a responsive layout for mobile and desktop.',
+    future: ['Export to PDF', 'Push notifications for classes', 'Dark mode toggle'],
+    status: 'Completed',
+    accent: 'orange',
+    featured: false,
+    demoLink: '',
+    githubLink: '',
+    imageBase64: '',
+    images: [],
+    createdAt: '2025-01-05T00:00:00.000Z',
+  },
+  {
+    id: 'seed-fintel',
+    title: 'FinIntel – Privacy-Preserving Fraud Intelligence Platform',
+    shortDescription:
+      'FinIntel is a real-time financial fraud detection and intelligence platform that monitors transactions, analyzes risk patterns, and identifies suspicious activities.',
+    description:
+      'FinIntel is a real-time financial fraud detection and intelligence platform that monitors transactions, analyzes risk patterns, and identifies suspicious activities. It combines modern frontend technologies with AI-powered analysis to provide comprehensive fraud intelligence while preserving user privacy.',
+    category: 'Other',
+    tools: ['React.js', 'Vite', 'Tailwind CSS', 'Node.js', 'Express.js'],
+    highlights: [
+      'Real-Time Monitoring',
+      'Risk Pattern Analysis',
+      'Privacy-Preserving',
+      'Fraud Detection',
+      'Transaction Intelligence',
+    ],
+    problem: 'Financial institutions need real-time fraud detection without compromising user privacy.',
+    solution: 'A privacy-preserving platform that uses AI to detect fraud patterns in real-time while keeping sensitive data secure.',
+    architecture:
+      'React/Vite frontend with Tailwind CSS for styling, backed by a Node.js/Express API that processes transactions and applies ML-based risk scoring.',
+    future: ['Blockchain audit trail', 'Multi-institution federation', 'Advanced anomaly detection'],
+    status: 'Completed',
+    accent: 'blue',
+    featured: true,
+    demoLink: '',
+    githubLink: '',
+    imageBase64: '',
+    images: [],
+    createdAt: '2025-01-06T00:00:00.000Z',
+  },
+  {
     id: 'seed-parkease',
     title: 'ParkEase – AI Powered Smart Parking Platform',
     shortDescription:
@@ -140,7 +200,7 @@ export const SEED_PROJECTS = [
 ];
 
 export const SECTION_STATS = [
-  { label: 'Projects Completed', value: 4, suffix: '+' },
-  { label: 'Technologies Used', value: 15, suffix: '+' },
+  { label: 'Projects Completed', value: 6, suffix: '+' },
+  { label: 'Technologies Used', value: 20, suffix: '+' },
   { label: 'Domains', value: 4, suffix: '', detail: 'AI · ML · Full Stack · Database' },
 ];
