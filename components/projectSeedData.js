@@ -40,7 +40,7 @@ export const SEED_PROJECTS = [
       'FinIntel is a real-time financial fraud detection and intelligence platform that monitors transactions, analyzes risk patterns, and identifies suspicious activities.',
     description:
       'FinIntel is a real-time financial fraud detection and intelligence platform that monitors transactions, analyzes risk patterns, and identifies suspicious activities. It combines modern frontend technologies with AI-powered analysis to provide comprehensive fraud intelligence while preserving user privacy.',
-    category: 'Other',
+    category: 'FinTech / AI',
     tools: ['React.js', 'Vite', 'Tailwind CSS', 'Node.js', 'Express.js'],
     highlights: [
       'Real-Time Monitoring',

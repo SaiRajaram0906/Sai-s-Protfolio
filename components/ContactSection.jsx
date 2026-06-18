@@ -9,7 +9,6 @@ const CONTACT_DETAILS = {
   githubDisplay: 'github.com/SaiRajaram0906',
   linkedin: 'https://linkedin.com/in/sairajaram',
   linkedinDisplay: 'linkedin.com/in/sairajaram',
-  phone: '+91 9629049550',
   location: 'Tamil Nadu, India',
 };
 
@@ -170,13 +169,6 @@ export default function ContactSection() {
           copyValue={CONTACT_DETAILS.linkedin}
           href={CONTACT_DETAILS.linkedin}
           external
-        />
-        <ContactCard
-          icon={<PhoneIcon />}
-          title="Phone"
-          value={CONTACT_DETAILS.phone}
-          copyValue={CONTACT_DETAILS.phone}
-          href={`tel:${CONTACT_DETAILS.phone.replace(/\s+/g, '')}`}
         />
       </div>
 

@@ -101,7 +101,7 @@ function SkeletonCard() {
   );
 }
 
-function ProjectCard({ project, index, onEdit, onDelete, onShowMore }) {
+function ProjectCard({ project, index, onEdit, onDelete, onShowMore, isAdmin }) {
   const cardRef = useRef(null);
   const [cardVisible, setCardVisible] = useState(false);
 
@@ -198,6 +198,7 @@ function ProjectCard({ project, index, onEdit, onDelete, onShowMore }) {
           </a>
         </div>
 
+        {isAdmin && (
         <div className={styles.projectCardMetaActions}>
           <button type="button" className={styles.metaActionButton} onClick={() => onEdit(project)}>
             Edit
@@ -206,6 +207,7 @@ function ProjectCard({ project, index, onEdit, onDelete, onShowMore }) {
             Delete
           </button>
         </div>
+        )}
       </div>
     </article>
   );
@@ -370,6 +372,14 @@ export default function ProjectDashboard() {
   const [editId, setEditId] = useState(null);
   const [visible, setVisible] = useState(false);
   const [statsVisible, setStatsVisible] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  // Enable admin mode via ?admin=true in the URL
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const params = new URLSearchParams(window.location.search);
+    setIsAdmin(params.get('admin') === 'true');
+  }, []);
 
   // Load (and seed) projects on mount.
   // Always merges new seed projects so returning visitors see updates.
@@ -567,6 +577,7 @@ export default function ProjectDashboard() {
         ))}
       </div>
 
+      {isAdmin && (
       <div
         ref={actionCardRef}
         className={`${styles.projectActionCard} ${visible ? styles.visible : ''}`}
@@ -590,6 +601,7 @@ export default function ProjectDashboard() {
           </button>
         </div>
       </div>
+      )}
 
       {isLoading ? (
         <div className={styles.projectGrid}>
@@ -608,8 +620,9 @@ export default function ProjectDashboard() {
               key={project.id}
               project={project}
               index={index}
-              onEdit={openModal}
-              onDelete={handleDeleteProject}
+              onEdit={isAdmin ? openModal : undefined}
+              onDelete={isAdmin ? handleDeleteProject : undefined}
+              isAdmin={isAdmin}
               onShowMore={setDetailsProject}
             />
           ))}

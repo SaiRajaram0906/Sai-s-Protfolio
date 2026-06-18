@@ -121,7 +121,7 @@ export default function VideoIntro() {
       {/* Foreground talking-head video */}
       <div className={styles.fgVideoWrap}>
         <div className={styles.fgVideoInner}>
-          <video ref={videoRef} className={styles.fgVideo} src="/hero.mp4" playsInline onEnded={() => setIsPlaying(false)} />
+          <video ref={videoRef} className={styles.fgVideo} src="/hero.mp4" playsInline loop onEnded={() => setIsPlaying(false)} />
           <div className={styles.videoRim} />
         </div>
       </div>
