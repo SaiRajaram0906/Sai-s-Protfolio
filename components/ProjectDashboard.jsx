@@ -424,7 +424,7 @@ export default function ProjectDashboard() {
     );
     observer.observe(card);
     return () => observer.disconnect();
-  }, []);
+  }, [isAdmin]);
 
   useEffect(() => {
     const node = statsRef.current;
