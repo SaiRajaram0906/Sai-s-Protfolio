@@ -6,9 +6,9 @@ import styles from '../styles/page.module.css';
 const EXPERIENCE_AREAS = ['AI & ML', 'Full Stack Development', 'Database Design', 'UI/UX'];
 
 const PROFILE_STATS = [
-  { label: 'Projects Completed', value: 4, suffix: '+' },
-  { label: 'Technologies', value: 15, suffix: '+' },
-  { label: 'Internships', value: 1, suffix: '' },
+  { label: 'Projects Completed', value: 6, suffix: '+' },
+  { label: 'Technologies', value: 26, suffix: '+' },
+  { label: 'Internship', value: 1, suffix: '' },
 ];
 
 function useCountUp(target, active, duration = 1400) {
