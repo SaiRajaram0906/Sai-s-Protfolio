@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import styles from '../styles/page.module.css';
 
-const EXPERIENCE_ITEMS = [
+export const EXPERIENCE_ITEMS = [
   {
     role: 'Machine Learning Intern',
     org: 'Corizo',

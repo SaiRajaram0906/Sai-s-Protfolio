@@ -442,6 +442,7 @@ export default function ProjectDashboard() {
   const saveProjects = (projectsToSave) => {
     if (typeof window === 'undefined') return;
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(projectsToSave));
+    window.dispatchEvent(new Event('portfolio_projects_updated'));
   };
 
   useEffect(() => {
@@ -560,13 +561,42 @@ export default function ProjectDashboard() {
     return all.size;
   }, [projects]);
 
+  const domainStats = useMemo(() => {
+    const domains = new Set();
+    projects.forEach((p) => {
+      if (p.category) {
+        let cat = p.category;
+        if (cat.includes('/')) {
+          cat.split('/').forEach((part) => {
+            const trimmed = part.trim();
+            if (trimmed === 'Web Development') domains.add('Web Dev');
+            else if (trimmed === 'Database Management') domains.add('Database');
+            else domains.add(trimmed);
+          });
+        } else {
+          if (cat === 'Machine Learning') domains.add('ML');
+          else if (cat === 'Database Management') domains.add('Database');
+          else if (cat === 'Web Development') domains.add('Web Dev');
+          else domains.add(cat);
+        }
+      }
+    });
+    const uniqueList = Array.from(domains);
+    return {
+      label: 'Domains',
+      value: uniqueList.length,
+      suffix: '',
+      detail: uniqueList.join(' · '),
+    };
+  }, [projects]);
+
   const liveStats = useMemo(
     () => [
       { label: 'Projects Completed', value: projectCount, suffix: '+' },
       { label: 'Technologies Used', value: techCount, suffix: '+' },
-      SECTION_STATS[2],
+      domainStats,
     ],
-    [projectCount, techCount]
+    [projectCount, techCount, domainStats]
   );
 
   return (

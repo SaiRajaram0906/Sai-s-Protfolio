@@ -2,14 +2,10 @@
 
 import { useEffect, useRef, useState } from 'react';
 import styles from '../styles/page.module.css';
+import { EXPERIENCE_ITEMS } from './Experience';
 
 const EXPERIENCE_AREAS = ['AI & ML', 'Full Stack Development', 'Database Design', 'UI/UX'];
 
-const PROFILE_STATS = [
-  { label: 'Projects Completed', value: 6, suffix: '+' },
-  { label: 'Technologies', value: 26, suffix: '+' },
-  { label: 'Internship', value: 1, suffix: '' },
-];
 
 function useCountUp(target, active, duration = 1400) {
   const [value, setValue] = useState(0);
@@ -49,6 +45,8 @@ function ProfileStat({ stat, active, delay }) {
 export default function ProfileCard() {
   const cardRef = useRef(null);
   const [visible, setVisible] = useState(false);
+  const [projectCount, setProjectCount] = useState(6);
+  const [techCount, setTechCount] = useState(26);
 
   useEffect(() => {
     const node = cardRef.current;
@@ -62,6 +60,45 @@ export default function ProfileCard() {
     observer.observe(node);
     return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const loadStats = () => {
+      try {
+        const raw = window.localStorage.getItem('portfolioProjects') || window.localStorage.getItem('cinematicPortfolioProjects');
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (Array.isArray(parsed)) {
+            setProjectCount(parsed.length);
+            const techs = new Set();
+            parsed.forEach((p) => (p.tools || []).forEach((t) => techs.add(t)));
+            if (techs.size > 0) {
+              setTechCount(techs.size);
+            }
+          }
+        }
+      } catch (error) {
+        console.warn('Failed to load dynamic stats in ProfileCard:', error);
+      }
+    };
+
+    loadStats();
+    window.addEventListener('portfolio_projects_updated', loadStats);
+    return () => {
+      window.removeEventListener('portfolio_projects_updated', loadStats);
+    };
+  }, []);
+
+  const internshipCount = EXPERIENCE_ITEMS.filter((item) =>
+    item.role.toLowerCase().includes('intern')
+  ).length;
+
+  const stats = [
+    { label: 'Projects Completed', value: projectCount, suffix: '+' },
+    { label: 'Technologies', value: techCount, suffix: '+' },
+    { label: internshipCount === 1 ? 'Internship' : 'Internships', value: internshipCount, suffix: '' },
+  ];
 
   return (
     <aside
@@ -86,7 +123,7 @@ export default function ProfileCard() {
       </p>
 
       <div className={styles.profileStatsRow}>
-        {PROFILE_STATS.map((stat, i) => (
+        {stats.map((stat, i) => (
           <ProfileStat key={stat.label} stat={stat} active={visible} delay={i * 140} />
         ))}
       </div>

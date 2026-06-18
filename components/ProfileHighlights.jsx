@@ -8,12 +8,6 @@ const CERTIFICATIONS = [
   { title: 'Data Analytics Job Simulation', org: 'Deloitte' },
 ];
 
-const ACHIEVEMENTS = [
-  'Built 6+ Projects',
-  'Full Stack Development',
-  'Machine Learning Projects',
-  'Database Automation Systems',
-];
 
 const CORE_COMPETENCIES = [
   'Data Processing',
@@ -67,6 +61,38 @@ export default function ProfileHighlights() {
   const [certRef, certVisible] = useReveal();
   const [achieveRef, achieveVisible] = useReveal();
   const [coreRef, coreVisible] = useReveal();
+  const [projectCount, setProjectCount] = useState(6);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const loadStats = () => {
+      try {
+        const raw = window.localStorage.getItem('portfolioProjects') || window.localStorage.getItem('cinematicPortfolioProjects');
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (Array.isArray(parsed)) {
+            setProjectCount(parsed.length);
+          }
+        }
+      } catch (error) {
+        console.warn('Failed to load project count in ProfileHighlights:', error);
+      }
+    };
+
+    loadStats();
+    window.addEventListener('portfolio_projects_updated', loadStats);
+    return () => {
+      window.removeEventListener('portfolio_projects_updated', loadStats);
+    };
+  }, []);
+
+  const achievements = [
+    `Built ${projectCount}+ Projects`,
+    'Full Stack Development',
+    'Machine Learning Projects',
+    'Database Automation Systems',
+  ];
 
   return (
     <section className={styles.highlightsSection}>
@@ -97,7 +123,7 @@ export default function ProfileHighlights() {
         >
           <h3 className={styles.highlightCardTitle}>Achievements</h3>
           <ul className={styles.achievementList}>
-            {ACHIEVEMENTS.map((item) => (
+            {achievements.map((item) => (
               <li key={item}>
                 <span className={styles.achievementIcon}>
                   <AchievementIcon />
