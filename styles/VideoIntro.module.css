@@ -260,6 +260,32 @@
   transform: translateY(-2px);
 }
 
+.ctaResume {
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 26px;
+  border: 1px solid rgba(56, 211, 195, 0.25);
+  color: #38D3C3;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background: rgba(12,12,12,0.55);
+  transition: border-color 0.25s ease, color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+}
+
+.ctaResume:hover {
+  border-color: #38D3C3;
+  color: #FAFAF8;
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(56, 211, 195, 0.4);
+}
+
 /* ── Glassmorphism controls ── */
 .controls {
   position: absolute;
@@ -465,6 +491,7 @@
   }
 
   .ctaPrimary,
+  .ctaResume,
   .ctaGhost {
     width: 100%;
     justify-content: center;

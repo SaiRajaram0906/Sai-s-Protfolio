@@ -403,6 +403,28 @@ export default function ProjectDashboard() {
         if (parsed.length === 0) parsed = SEED_PROJECTS;
       }
 
+      // Deduplicate parsed array by project title (case-insensitive, trimmed) and by ID
+      const deduplicated = [];
+      const seenTitles = new Set();
+      const seenIds = new Set();
+
+      parsed.forEach((project) => {
+        if (!project || !project.title) return;
+        const normalizedTitle = project.title.trim().toLowerCase();
+        const projectId = project.id || (Date.now().toString() + Math.random().toString());
+        
+        if (!seenTitles.has(normalizedTitle) && !seenIds.has(projectId)) {
+          seenTitles.add(normalizedTitle);
+          seenIds.add(projectId);
+          deduplicated.push({
+            ...project,
+            id: projectId
+          });
+        }
+      });
+
+      parsed = deduplicated;
+
       setProjects(parsed);
       window.localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
       window.localStorage.setItem(SEED_FLAG_KEY, 'true');
