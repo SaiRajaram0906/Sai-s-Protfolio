@@ -131,7 +131,7 @@ export default function VideoIntro() {
       <div ref={contentRef} className={styles.content}>
 
         <span data-animate className={styles.tagline}>
-          Data Analyst &nbsp;·&nbsp; Web Developer
+          Data Scientist &nbsp;·&nbsp; Web Developer
         </span>
 
         <div className={styles.nameBlock}>
