@@ -74,10 +74,12 @@ function HeroCard({ card, index }) {
 
 export default function HeroCards() {
   return (
-    <div className={styles.heroCardsSection}>
-      {HERO_CARDS.map((card, i) => (
-        <HeroCard key={card.title} card={card} index={i} />
-      ))}
-    </div>
+    <section className={styles.heroCardsSection}>
+      <div className={styles.heroCardsGrid}>
+        {HERO_CARDS.map((card, i) => (
+          <HeroCard key={card.title} card={card} index={i} />
+        ))}
+      </div>
+    </section>
   );
 }

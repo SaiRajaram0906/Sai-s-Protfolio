@@ -53,23 +53,34 @@ export default function Experience() {
 
       <div
         ref={containerRef}
-        className={`${styles.experienceContainer} ${visible ? styles.containerVisible : ''}`}
+        className={styles.timelineWrap}
       >
-        {EXPERIENCE_ITEMS.map((item) => (
-          <div key={item.role} className={styles.experienceColumn}>
-            <div className={styles.experienceHeader}>
-              <h3 className={styles.experienceRole}>{item.role}</h3>
-              {item.period && <span className={styles.experiencePeriod}>{item.period}</span>}
+        {EXPERIENCE_ITEMS.map((item, index) => (
+          <div 
+            key={item.role} 
+            className={`${styles.timelineItem} ${visible ? styles.cardVisible : ''}`}
+            style={{ transitionDelay: `${index * 150}ms` }}
+          >
+            <div className={styles.timelineDotCol}>
+              <div className={styles.timelineDot} />
+              {index < EXPERIENCE_ITEMS.length - 1 && <div className={styles.timelineLine} />}
             </div>
-            <p className={styles.experienceOrg}>{item.org}</p>
-            <ul className={styles.experienceBulletList}>
-              {item.achievements.map((a) => (
-                <li key={a} className={styles.experienceBulletItem}>
-                  <span className={styles.experienceBulletDot} />
-                  {a}
-                </li>
-              ))}
-            </ul>
+            
+            <div className={styles.timelineCard}>
+              <div className={styles.timelineCardHeader}>
+                <h3 className={styles.timelineRole}>{item.role}</h3>
+                {item.period && <span className={styles.timelinePeriod}>{item.period}</span>}
+              </div>
+              <p className={styles.timelineOrg}>{item.org}</p>
+              <ul className={styles.experienceBulletList}>
+                {item.achievements.map((a) => (
+                  <li key={a} className={styles.experienceBulletItem}>
+                    <span className={styles.experienceBulletDot} />
+                    {a}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         ))}
       </div>

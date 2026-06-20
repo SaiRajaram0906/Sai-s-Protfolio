@@ -125,7 +125,11 @@ function ProjectCard({ project, index, onEdit, onDelete, onShowMore, isAdmin }) 
     <article
       ref={cardRef}
       className={`${styles.projectCard} ${accentClass} ${cardVisible ? styles.cardVisible : ''}`}
-      style={{ transitionDelay: cardVisible ? `${Math.min(index, 8) * 90}ms` : '0ms' }}
+      style={{ 
+        transitionDelay: cardVisible ? `${Math.min(index, 8) * 90}ms` : '0ms',
+        cursor: 'pointer' 
+      }}
+      onClick={() => onShowMore(project)}
     >
       {project.imageBase64 || project.image ? (
         <img
@@ -174,7 +178,10 @@ function ProjectCard({ project, index, onEdit, onDelete, onShowMore, isAdmin }) 
           <button
             type="button"
             className={`${styles.actionButton} ${styles.primaryButton}`}
-            onClick={() => onShowMore(project)}
+            onClick={(e) => {
+              e.stopPropagation();
+              onShowMore(project);
+            }}
           >
             Show More
           </button>
@@ -184,6 +191,7 @@ function ProjectCard({ project, index, onEdit, onDelete, onShowMore, isAdmin }) 
             rel="noreferrer"
             className={`${styles.actionButton} ${styles.secondaryButton} ${!project.githubLink ? styles.disabledButton : ''}`}
             aria-disabled={!project.githubLink}
+            onClick={(e) => e.stopPropagation()}
           >
             GitHub
           </a>
@@ -193,6 +201,7 @@ function ProjectCard({ project, index, onEdit, onDelete, onShowMore, isAdmin }) 
             rel="noreferrer"
             className={`${styles.actionButton} ${styles.secondaryButton} ${!project.demoLink ? styles.disabledButton : ''}`}
             aria-disabled={!project.demoLink}
+            onClick={(e) => e.stopPropagation()}
           >
             Demo
           </a>
@@ -200,10 +209,24 @@ function ProjectCard({ project, index, onEdit, onDelete, onShowMore, isAdmin }) 
 
         {isAdmin && (
         <div className={styles.projectCardMetaActions}>
-          <button type="button" className={styles.metaActionButton} onClick={() => onEdit(project)}>
+          <button 
+            type="button" 
+            className={styles.metaActionButton} 
+            onClick={(e) => {
+              e.stopPropagation();
+              onEdit(project);
+            }}
+          >
             Edit
           </button>
-          <button type="button" className={styles.metaActionButton} onClick={() => onDelete(project)}>
+          <button 
+            type="button" 
+            className={styles.metaActionButton} 
+            onClick={(e) => {
+              e.stopPropagation();
+              onDelete(project);
+            }}
+          >
             Delete
           </button>
         </div>
@@ -331,7 +354,7 @@ function ProjectDetailModal({ project, onClose }) {
           </section>
         )}
 
-        <div className={styles.modalActions}>
+        <div className={styles.projectModalActions}>
           <a
             href={project.githubLink || '#'}
             target="_blank"

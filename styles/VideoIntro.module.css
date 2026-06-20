@@ -591,6 +591,10 @@
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   transition: border-color 0.3s ease, transform 0.3s ease, background 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .heroInfoCard:hover {
@@ -639,9 +643,10 @@
   margin: 0;
   padding: 0;
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 4px 14px;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
 }
 
 .heroInfoList li {
@@ -649,19 +654,21 @@
   font-size: 12.5px;
   line-height: 1.4;
   color: rgba(232, 228, 220, 0.78);
-  position: relative;
-  padding-left: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
 }
 
 .heroInfoList li::before {
   content: '';
-  position: absolute;
-  left: 0;
-  top: 6px;
+  display: inline-block;
+  position: static;
   width: 5px;
   height: 5px;
   border-radius: 50%;
   background: #38D3C3;
+  flex-shrink: 0;
 }
 
 @media (max-width: 768px) {

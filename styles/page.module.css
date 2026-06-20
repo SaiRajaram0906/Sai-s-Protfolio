@@ -1183,10 +1183,18 @@ body.modal-open {
    ============================================================ */
 
 .heroCardsSection {
+  width: 100%;
+  background: #090909;
+  display: flex;
+  justify-content: center;
+  padding: 100px 7vw 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.heroCardsGrid {
   width: min(100%, 1240px);
-  margin-top: 80px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 24px;
 }
 
@@ -1202,6 +1210,8 @@ body.modal-open {
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.6s ease, transform 0.5s ease, border-color 0.3s ease, box-shadow 0.3s ease;
@@ -1226,6 +1236,7 @@ body.modal-open {
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.5);
   margin: 0 0 16px;
+  text-align: center;
 }
 
 .heroCardContent {
@@ -1233,11 +1244,15 @@ body.modal-open {
   flex-direction: column;
   gap: 6px;
   overflow: hidden;
+  align-items: center;
+  width: 100%;
 }
 
 .heroCardItem {
   display: flex;
   align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
 .heroCardItemText {
@@ -1262,16 +1277,19 @@ body.modal-open {
 }
 
 @media (max-width: 1024px) {
-  .heroCardsSection {
+  .heroCardsGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 640px) {
   .heroCardsSection {
+    padding: 60px 6vw 0;
+  }
+
+  .heroCardsGrid {
     grid-template-columns: 1fr;
     gap: 16px;
-    margin-top: 60px;
   }
 
   .heroCard {
@@ -1997,6 +2015,35 @@ body.modal-open {
   margin: 0 0 16px;
 }
 
+.experienceBulletList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.experienceBulletItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: rgba(232, 228, 220, 0.75);
+}
+
+.experienceBulletDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #ff7a00;
+  margin-top: 9px;
+  flex-shrink: 0;
+  box-shadow: 0 0 8px rgba(255, 122, 0, 0.5);
+}
+
 @media (max-width: 640px) {
   .experienceSection {
     padding: 80px 6vw;
@@ -2039,6 +2086,10 @@ body.modal-open {
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.6s ease, transform 0.5s ease, border-color 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .highlightCard.cardVisible {
@@ -2064,12 +2115,16 @@ body.modal-open {
   display: flex;
   flex-direction: column;
   gap: 18px;
+  width: 100%;
 }
 
 .certItem {
   display: flex;
   gap: 14px;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+  width: 100%;
 }
 
 .certIcon {
@@ -2107,15 +2162,18 @@ body.modal-open {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  width: 100%;
 }
 
 .achievementList li {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 12px;
   font-family: 'Inter', sans-serif;
   font-size: 14.5px;
   color: rgba(232, 228, 220, 0.78);
+  width: 100%;
 }
 
 .achievementIcon {
@@ -2135,6 +2193,7 @@ body.modal-open {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  justify-content: center;
 }
 
 .competencyPill {
@@ -2164,3 +2223,163 @@ body.modal-open {
     padding: 24px 20px;
   }
 }
+
+/* ============================================================
+   Project Detail Modal
+   ============================================================ */
+
+.projectModalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 5, 5, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  z-index: 1100;
+  overflow-y: auto;
+}
+
+.projectModalContent {
+  position: relative;
+  width: min(100%, 780px);
+  max-height: 90vh;
+  background: #0a0a0a;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow: 0 40px 120px rgba(0, 0, 0, 0.65), inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+  animation: modalIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scroll-behavior: smooth;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.projectModalContent::-webkit-scrollbar {
+  width: 8px;
+}
+
+.projectModalContent::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.projectModalContent::-webkit-scrollbar-thumb {
+  background: rgba(255, 122, 0, 0.4);
+  border-radius: 999px;
+}
+
+.projectModalCloseButton {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.7);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 100;
+  transition: all 0.2s ease;
+}
+
+.projectModalCloseButton:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.projectModalHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+  padding-right: 48px;
+}
+
+.projectModalTitle {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: clamp(24px, 4vw, 38px);
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.projectModalImages {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.projectModalImages img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+}
+
+.projectModalSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.projectModalText {
+  color: rgba(232, 228, 220, 0.75);
+  font-size: 16px;
+  line-height: 1.8;
+  margin: 0;
+}
+
+.projectModalStrong {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .projectModalContent {
+    width: 95vw;
+    max-height: 92vh;
+    padding: 28px 20px;
+    gap: 24px;
+  }
+}
+
+.projectModalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  margin-top: 12px;
+  position: sticky;
+  bottom: -40px; /* Aligns with padding-bottom of .projectModalContent */
+  margin-bottom: -40px;
+  padding-bottom: 40px;
+  z-index: 10;
+  background: #0a0a0a;
+}
+
+@media (max-width: 768px) {
+  .projectModalActions {
+    bottom: -28px; /* Aligns with mobile bottom padding of .projectModalContent */
+    margin-bottom: -28px;
+    padding-bottom: 28px;
+  }
+}
+
