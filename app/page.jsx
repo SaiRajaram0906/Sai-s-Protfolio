@@ -25,13 +25,11 @@ export default function Home() {
       <section id="work" className={styles.nextSection}>
         <div className={styles.workHeaderGrid}>
           <div className={styles.workHeaderLeft}>
-            <div>
-              <p className={styles.sectionLabel}>Selected Work</p>
-              <h2 className={styles.sectionTitle}>Projects & Experiments</h2>
-              <p className={styles.sectionBody}>
-                Building at the intersection of AI, cinematic design, and modern engineering.
-              </p>
-            </div>
+            <p className={styles.sectionLabel}>Selected Work</p>
+            <h2 className={styles.sectionTitle}>Projects & Experiments</h2>
+            <p className={styles.sectionBody}>
+              Building at the intersection of AI, cinematic design, and modern engineering.
+            </p>
             {/* Tech Stack integrated into left column */}
             <TechStack />
           </div>

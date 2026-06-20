@@ -4,6 +4,36 @@
 
 export const SEED_PROJECTS = [
   {
+    id: 'seed-skyline-weather',
+    title: 'Skyline Weather – Global Weather Forecasting Application',
+    shortDescription:
+      'Developed a responsive weather application using React.js and OpenWeatherMap API to provide real-time weather data, location-based forecasts, geolocation support, and dynamic weather visualization for cities worldwide.',
+    description:
+      'Skyline Weather is a modern React-based weather application that provides real-time weather information for any city worldwide. It uses the OpenWeatherMap API to display temperature, humidity, wind speed, weather conditions, and location-based forecasts. The application supports GPS-based weather retrieval using latitude and longitude, recent search history, responsive design, and a clean user-friendly interface built with React, Vite, and modern CSS.',
+    category: 'Full Stack / AI',
+    tools: ['React', 'Vite', 'HTML', 'CSS', 'JavaScript'],
+    highlights: [
+      'Real-Time Weather Data',
+      'Geolocation Forecasts',
+      'Recent Search History',
+      'GPS Weather Retrieval',
+      'Responsive Design',
+    ],
+    problem: 'Users needed a modern, quick, and location-aware way to access real-time weather forecasts worldwide without cluttered layouts.',
+    solution: 'A streamlined React weather dashboard integrated with OpenWeatherMap APIs and geolocation detection.',
+    architecture:
+      'A Vite-powered React application with styled-components or pure CSS modules for layouts, requesting remote data asynchronously and storing user search history in LocalStorage.',
+    future: ['Hourly forecast graphs', 'Severe weather alerts', 'Radar map integrations'],
+    status: 'Featured Project',
+    accent: 'orange',
+    featured: true,
+    demoLink: 'https://skyline-weather-jet.vercel.app/',
+    githubLink: 'https://github.com/SaiRajaram0906/skyline-weather',
+    imageBase64: '',
+    images: [],
+    createdAt: '2025-01-07T00:00:00.000Z',
+  },
+  {
     id: 'seed-timetable',
     title: 'My Timetable – Smart Offline Schedule Organizer',
     shortDescription:
